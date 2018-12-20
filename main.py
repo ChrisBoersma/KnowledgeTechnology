@@ -9,7 +9,7 @@ specifications.readSpecificationDictionary()
 phones = wiktionary_reader.findIPA()
 p = phones[0]
 specifications = wiktionary_reader.getSpecification(p)
-#db.createTable(specifications)
+db.createTable(specifications)
 for p in phones:
 	specifications = wiktionary_reader.getSpecification(p)
 	db.addPhone(specifications)

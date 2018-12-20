@@ -2,7 +2,11 @@ import pymysql
 
 def executeCommand(command):
 	global cur
-	cur.execute(command)
+	global res
+	global db
+	res = cur.execute(command)
+	print(res)
+	db.commit()
 	
 def getResults():
 	global cur
@@ -21,3 +25,5 @@ def init():
 		             passwd='Ww4A_p~eOXAk',  
 		             db='hellodb')
 	cur = db.cursor()
+"INSERT INTO phones (Screen_diagonal, Camera_resolution, Operating_System, Frontcamera_resolution, Maximum_sd_card_capacity) VALUES ('6.0 inch', '24 + 5 + 8 megapixel', 'Android 8.0', '24 megapixel', '256 GB');"
+

@@ -17,6 +17,7 @@ def findIPA():
 			url = 'https://www.mediamarkt.nl/nl/category/_smartphones-483222.html?page='+str(page)
 			string = requests.get(url).text
 		else:
+			print(str(i) + ": " + str(m2.group(2)))
 			phones.append("https://www.mediamarkt.nl/nl/product/"+m2.group(2))
 			string = m2.group(3)
 			i=i+1
@@ -29,15 +30,23 @@ def getSpecification(url):
 	page=1
 	phones =[]
 	#print(string)
+	dic={}
+	m2 = re.search('(.*?)"og:title" content="(.*?)"(.*)', string, flags = re.DOTALL)
+	dic["name"] = m2.group(2)
+	string = m2.group(3)
+	#print(string)
+	m2 = re.search('(.*?)"product:price:amount" content="(.*?)"(.*)', string, flags = re.DOTALL)
+	dic["price"] = m2.group(2)
+	string = m2.group(3)
 	m = re.split('Productspecificaties', string)
 	#print(m)
 	string = m[1]
 	m = re.split('Toon alle specificaties', string)
 	string = m[0]
-	dic={}	
 	numberOfSpecifications = string.count("<dt>")
 	#dic["Besturingssysteem"] = "Android 8.0"
 	#print("STRRIJNHING: ", string)
+	
 	while i<numberOfSpecifications: 
 		m=re.split('<dt>',string, maxsplit = 1)
 		#print("Size of m:" + str(len(m)))

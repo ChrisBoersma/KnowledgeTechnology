@@ -27,7 +27,7 @@ def addPhone(specifications):
 			values += ', '
 		else:
 			i = 1
-		columns += "'" + key + "'"
+		columns += key
 		values += "'" + value + "'"
 	q += columns + ") VALUES (" + values + ");"
 	print("")
