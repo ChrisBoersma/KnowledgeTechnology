@@ -1,0 +1,33 @@
+#index {
+  border-style: solid;
+  border-width: 2px;
+  margin: auto;
+  padding: 25px;
+  font-family: "Helvetica";
+}
+#header{
+	border-style: solid;
+	border-width: 2px;
+	margin: 10px;
+	padding: 10px;
+}
+
+p {
+}
+.ui-content{
+	border-style: solid;
+	border-width: 2px;
+	margin: 10px;
+	padding: 25px;
+}
+
+#footer{
+	border-style: solid;
+	border-width: 2px;
+	margin: 10px;
+	padding: 5px;
+	text-align: center;
+}
+div{
+	max-width: 1000px;
+}
