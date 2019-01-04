@@ -9,7 +9,9 @@ def findIPA():
 	i=0
 	page=1
 	phones =[]
-	while i<20: 
+	while i<20:
+		m2 = re.findall('(/nl/product/.*?)"', string)
+		print(m2)
 		m2 = re.search('(.*?)/nl/product/(.*?)"(.*)', string, flags = re.DOTALL)
 		#print(m2.groups())
 		if m2 == None:
