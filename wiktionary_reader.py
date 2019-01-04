@@ -71,6 +71,7 @@ def getSpecification(url):
 		print(k)
 		if k in specifications.dic:
 			specs[specifications.dic[k]] = v
+	specs = dic
 	return specs
 
 #words = ["which", "who", "spoonerism", "wiktionary", "football", "world", "photos", "iPhone", "London", "Manchester", "that", "threat", "goal", "keeper", "Chelsea", "FIFA", "Czechoslovakia", "Paris", "United", "column"]

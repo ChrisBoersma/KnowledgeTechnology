@@ -10,6 +10,7 @@ import read
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
+import a
 
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
@@ -24,27 +25,20 @@ def index():
 	data = read.generateForm(q)
 	return render_template('layouts/index.html',
 						   title=title, data = data)
-
-@app.route('/results/', methods=['GET', 'POST'])
-def results():
-	title = 'Result'
-	#data = get_file_content(uuid)
+@app.route('/questions/', methods=['GET', 'POST'])
+def questions():
+	title = 'Question'
 	data = request.form.getlist("brand")
-	#for d in data:
-	#	print(d)
-	#print(data)
+	data = a.getQuestion(request.form)
 	return render_template('layouts/results.html',
 						   title=title,
 						   data=data)
-
-#@app.route('/postmethod', methods = ['POST'])
-#def post_javascript_data():
-#	jsdata = request.form['canvas_data']
-#	unique_id = create_csv(jsdata)
-#	params = { 'uuid' : unique_id }
-#	return jsonify(params)
-
-
-
+@app.route('/results/', methods=['GET', 'POST'])
+def results():
+	title = 'Result
+	data = a.getResults()
+	return render_template('layouts/results.html',
+						   title=title,
+						   data=data)
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)
