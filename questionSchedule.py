@@ -5,7 +5,7 @@ i = 0
 
 def addToSchedule(questions):
 	global schedule
-	if type(questions) ~= list:
+	if type(questions) != list:
 		questions = [questions]
 	schedule = questions + schedule
 
