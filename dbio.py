@@ -3,10 +3,13 @@ import extraction
 def extractInformation():
 	db = []
 	urls = extraction.getMediaMarktURLs()
+	#urls = ["https://www.mediamarkt.nl/nl/product/_nokia-1-2018-8gb-dual-sim-rood-1562780.html"]
 	for u in urls:
 		specs = extraction.getMediaMarktSpecifications(u)
-		#specs = extraction.addKimovilURL(specs)
-		#specs = extraction.addKimovilSpecifications(specs)
+		print("Loop: " + u)
+		kurl = extraction.getKimovilURL(specs)
+		#specs = extraction.addKimovilSpecifications(kurl, specs)
+		print(kurl)
 		db.append(specs)
 	return db
 
@@ -47,3 +50,6 @@ def saveDB(filename, db):
 				f.write("\t")
 			f.write(db[i][keys[j]])
 	f.close()
+
+db = extractInformation()
+saveDB("dbsavefile2", db)
