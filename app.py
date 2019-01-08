@@ -6,7 +6,7 @@ from flask import redirect, request, jsonify, url_for
 import io
 import os
 import uuid
-import read
+#import read
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
@@ -20,9 +20,10 @@ app._static_folder = os.path.abspath("templates/static/")
 @app.route('/', methods=['GET'])
 def index():
 	title = 'Hello world'
-	read.init()
-	q = read.getNextQuestion()
-	data = read.generateForm(q)
+	#read.init()
+	#q = read.getNextQuestion()
+	#data = read.generateForm(q)
+	data = "htmlFiles/qBrand.html"
 	return render_template('layouts/index.html',
 						   title=title, data = data)
 @app.route('/questions/', methods=['GET', 'POST'])
@@ -35,7 +36,7 @@ def questions():
 						   data=data)
 @app.route('/results/', methods=['GET', 'POST'])
 def results():
-	title = 'Result
+	title = 'Result'
 	data = a.getResults()
 	return render_template('layouts/results.html',
 						   title=title,
