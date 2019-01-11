@@ -31,7 +31,7 @@ def questions():
 	title = 'Question'
 	data = request.form.getlist("brand")
 	data = a.getQuestion(request.form)
-	return render_template('layouts/results.html',
+	return render_template('layouts/index.html',
 						   title=title,
 						   data=data)
 @app.route('/results/', methods=['GET', 'POST'])
