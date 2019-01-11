@@ -3,14 +3,18 @@ import extraction
 def extractInformation():
 	db = []
 	urls = extraction.getMediaMarktURLs()
-	#urls = ["https://www.mediamarkt.nl/nl/product/_nokia-1-2018-8gb-dual-sim-rood-1562780.html"]
+	#urls = ["https://www.mediamarkt.nl/nl/product/_wiko-sunny3-mini-8gb-dual-sim-zwart-1601156.html", "https://www.mediamarkt.nl/nl/product/_nokia-1-2018-8gb-dual-sim-rood-1562780.html"]
 	for u in urls:
 		specs = extraction.getMediaMarktSpecifications(u)
 		print("Loop: " + u)
 		kurl = extraction.getKimovilURL(specs)
-		#specs = extraction.addKimovilSpecifications(kurl, specs)
-		print(kurl)
-		db.append(specs)
+		if kurl != "":
+			specs += extraction.addKimovilSpecifications(kurl)
+			specs = dict(specs)
+			print(kurl)
+			specs["mediamarkt url"] = u
+			specs["kimovil url"] = kurl
+			db.append(specs)
 	return db
 
 def openDB(filename):
@@ -48,7 +52,8 @@ def saveDB(filename, db):
 		for j in range(min(len(keys), len(db[i]))):
 			if j > 0:
 				f.write("\t")
-			f.write(db[i][keys[j]])
+			if keys[j] in db[i]:
+				f.write(db[i][keys[j]].replace("\n", " ").replace("\t", " "))
 	f.close()
 
 db = extractInformation()
