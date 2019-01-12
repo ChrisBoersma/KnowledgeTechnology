@@ -11,9 +11,9 @@ def updateScores(expression, variable, v):
 
 def handleInput(givenInput):
 	global questions
-	questionType = givenInput.get("questionType")
-	if questionType == "QuestionSelector":
-		newQuestionsStrings = givenInput.getList("selected")
+	questionType = givenInput.get("questiontype")
+	if questionType == "questionselector":
+		newQuestionsStrings = givenInput.getlist("selected")
 		for n in newQuestionsStrings:
 			newQuestions = n.split(" ")
 			for nq in newQuestions:
@@ -27,6 +27,7 @@ def handleInput(givenInput):
 		for v in values:
 			value = givenInput.get(v)
 			updateScores(variable, value, v)
+	print(questions)
 
 def getNextQuestion():
 	global i
