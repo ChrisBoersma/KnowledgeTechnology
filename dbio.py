@@ -58,6 +58,6 @@ def saveDB(filename, db):
 	f.close()
 
 
-db = openDB("dbsavefile2")
-db = filter.filterDB(db)
-saveDB("dbsavefile1", db)
+#db = openDB("dbsavefile2")
+#db = filter.filterDB(db)
+#saveDB("dbsavefile1", db)
