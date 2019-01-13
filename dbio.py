@@ -1,4 +1,5 @@
 import extraction
+import filter
 
 def extractInformation():
 	db = []
@@ -56,5 +57,7 @@ def saveDB(filename, db):
 				f.write(db[i][keys[j]].replace("\n", " ").replace("\t", " "))
 	f.close()
 
-db = extractInformation()
-saveDB("dbsavefile2", db)
+
+db = openDB("dbsavefile2")
+db = filter.filterDB(db)
+saveDB("dbsavefile1", db)

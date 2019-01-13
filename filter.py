@@ -2,10 +2,18 @@ usedSpecs = {}
 
 def filter(specs):
 	filteredSpecs = {}
-	for k, v in specs:
+	print(specs)
+	for k in specs:
 		if k in usedSpecs:
-			filteredSpecs[usedSpecs[k]] = v
+			filteredSpecs[usedSpecs[k]] = specs[k]
+		print(k + ", " + specs[k])
 	return filteredSpecs
+
+def filterDB(db):
+	db2 = []
+	for d in db:
+		db2.append(filter(d))
+	return db2
 
 def readUsedSpecs():
 	global usedSpecs
