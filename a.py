@@ -54,7 +54,7 @@ def getNextQuestion():
 	global questions
 	if i == len(questions):
 		#results
-		return "resultsRedirect.html"
+		return "layouts/results.html"
 	q = questions[i]
 	i += 1
 	return "htmlFiles/" + q
@@ -72,7 +72,9 @@ def getQuestion(givenInput):
 	return newQuestion
 
 def getResults():
-	pass
+	newDb = db
+	return newDb
+		
 
 def init():
 	global db

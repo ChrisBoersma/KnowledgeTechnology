@@ -37,9 +37,11 @@ def questions():
 @app.route('/results/', methods=['GET', 'POST'])
 def results():
 	title = 'Result'
-	data = a.getResults()
-	return render_template('layouts/results.html',
-						   title=title,
-						   data=data)
+	result = a.getResults()
+	data = ""
+	print(result)
+	for i in range(len(result)):
+		data = data + result[i]["Name"]
+	return render_template('layouts/resultsFinal.html', title=title, data=data)
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)
