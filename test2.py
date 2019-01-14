@@ -1,6 +1,6 @@
 def sigmoid(args):
 	print("Sigmoid args: " + str(args))
-	return args[0] +args[1]
+	return args[0] / args[1]
 
 functions = {"sigmoid": sigmoid}
 

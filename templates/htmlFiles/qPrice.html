@@ -16,9 +16,9 @@
 		<p>
 		<form action="" method="post">
 			What is your budget?<br>
-			<input type="hidden" name="questiontype" value="range">
-			<input type="hidden" name="variableandvalues" value="Budget	Price">
-			0 <input type="range" name="Budget" value="Price"> 1000 <br>
+			<input type="hidden" name="questiontype" value="normal">
+			<input type="hidden" name="expression" value="sigmoid(Price, <Budget>)">
+			0 <input type="range" name="Budget" value="500"> 1000 <br>
 			<input type="submit">
 		</p>
 	</div>
