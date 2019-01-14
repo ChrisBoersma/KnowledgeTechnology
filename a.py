@@ -72,6 +72,7 @@ def getQuestion(givenInput):
 
 def getResults():
 	newDb = db
+	newDb = sorted(newDb, key=lambda newDb: newDb['score'])
 	return newDb
 		
 

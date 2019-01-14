@@ -23,7 +23,7 @@ def index():
 	#read.init()
 	#q = read.getNextQuestion()
 	#data = read.generateForm(q)
-	data = "htmlFiles/qBrand.html"
+	data = "/htmlFiles/index.html"
 	return render_template('layouts/index.html',
 						   title=title, data = data)
 @app.route('/questions/', methods=['GET', 'POST'])
@@ -40,8 +40,8 @@ def results():
 	result = a.getResults()
 	data = ""
 	print(result)
-	for i in range(len(result)):
-		data = data + result[i]["Name"]
+	for i in range(3):
+		data = data + result[i]["Name"] + " " + result[i]["Url"] + ", "
 	return render_template('layouts/resultsFinal.html', title=title, data=data)
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)
