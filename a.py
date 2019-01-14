@@ -1,29 +1,13 @@
 from dbio import *
+import test2
 questions = ["qUsage.html", "qBrand.html", "qPrice.html", "qSize.html"]
 i = 0
 db = []
 
-def getValue(expression, specs, givenInput, k, v):
-	expression = expression.replace("?k?", k).replace("?v?", v)
-
-def parseExpression(expression, specs, givenInput):
-	score = 1
-	print("Nothing lasts forever")
-	if "?" in expression:
-		print("I got so faaar")
-		print(givenInput)
-		for k in givenInput:
-			print("Nation controlled by the media")
-			v = givenInput.get(k)
-			print(k + ", " + v)
-			getValue(expression, specs, givenInput, k, v)
-	return 1
-			
-
 def updateScores(expression, variable, v):
 	for i in range(len(scores)):
 		if variable == None or v == None or db[i][variable] == v:
-			scores[i] *= parseExpression(expression, db[i])
+			scores[i] *= test2.parseExpression(expression, db[i])
 
 def handleInput(givenInput):
 	global questions
@@ -37,9 +21,24 @@ def handleInput(givenInput):
 			for nq in newQuestions:
 				if nq not in questions:
 					questions.append(nq)
-	else:
+	elif questionType == "Brandlike":
+	#	variableandvalues = givenInput.getList("variableandvalues")
+	#	variableandvalueslist = variableandvalues.split("\t")
+	#	variable = variableandvalueslist[0]
+	#	values = variableandvalueslist[1:]
+		variable = givenInput.get("variable")
+		for k in givenInput:
+			if k != "questiontype" and k != "expression" and k != "variable":
+				v = givenInput.get(k)
+				for i in range(len(db)):
+					if variable == None or k == None or db[i][variable] == k:
+						db[i]["score"] *= test2.getValue(expression.replace("?k?", k).replace("?v?", v), specs, givenInput, 0, [])["value"]
+						#test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
+	elif questionType == "normal":
 		for i in range(len(db)):
-			db[i]["score"] *= parseExpression("?", db[i], givenInput)
+			db[i]["score"] *= test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
+	print("QuestionType: ", questionType)
+	
 	#elif questionType == "Brandlike":
 	#	variableandvalues = givenInput.getList("variableandvalues")
 	#	variableandvalueslist = variableandvalues.split("\t")
@@ -68,6 +67,8 @@ def getQuestion(givenInput):
 			db[j]["score"] = 1
 	handleInput(givenInput)
 	newQuestion = getNextQuestion()
+	for d in db:
+		print(d)
 	return newQuestion
 
 def getResults():
@@ -78,6 +79,6 @@ def getResults():
 
 def init():
 	global db
-	db = openDB("dbsavefile1")
+	db = openDB("dbsavefile1")[:5]
 
 init()
