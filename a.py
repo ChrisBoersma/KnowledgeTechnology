@@ -27,12 +27,14 @@ def handleInput(givenInput):
 	#	variable = variableandvalueslist[0]
 	#	values = variableandvalueslist[1:]
 		variable = givenInput.get("variable")
+		expression = givenInput.get("expression")
 		for k in givenInput:
 			if k != "questiontype" and k != "expression" and k != "variable":
 				v = givenInput.get(k)
 				for i in range(len(db)):
-					if variable == None or k == None or db[i][variable] == k:
-						db[i]["score"] *= test2.getValue(expression.replace("?k?", k).replace("?v?", v), specs, givenInput, 0, [])["value"]
+					print("Variable: ", variable, " k: ", k, " db: ", db[i][variable].lower(), " k.lower(): ", k.lower())
+					if variable == None or k == None or db[i][variable].lower() == k.lower():
+						db[i]["score"] *= test2.getValue(expression.replace("?k?", k).replace("?v?", v), db[i], givenInput, 0, [])["value"]
 						#test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
 	elif questionType == "normal":
 		for i in range(len(db)):
@@ -79,6 +81,6 @@ def getResults():
 
 def init():
 	global db
-	db = openDB("dbsavefile1")[:5]
+	db = openDB("dbsavefile1")
 
 init()

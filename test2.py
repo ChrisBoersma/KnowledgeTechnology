@@ -1,7 +1,9 @@
+import math
+
 def sigmoid(args):
 	print("Sigmoid args: " + str(args))
 	x = args[1] - args[0]
-	return 1 / (1 + exp(-x)
+	return 1 / (1 + math.exp(-x))
 
 functions = {"sigmoid": sigmoid}
 
@@ -35,7 +37,10 @@ def parseVariable(expression, i, specs, givenInput):
 			parameters = dict["parameters"]
 			value = functions[variablename](parameters)
 		else:
-			value = float(specs[variablename])
+			if isinstance(specs[variablename], float):
+				value = specs[variablename]
+			else:
+				value = float(specs[variablename].split(" ")[0])
 			
 	#if parameters == []:
 	#else:
@@ -66,11 +71,12 @@ def parseValue(expression, i, specs, givenInput):
 	
 def parseInputVariable(expression, i, givenInput):
 	i += 1
+	variablename = ""
 	while i in range(len(expression)) and expression[i] != ">":
 		print("Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
 		variablename += expression[i]
 		i += 1
-	return {"value": givenInput.get(variablename), "i": i + 1}
+	return {"value": float(givenInput.get(variablename)), "i": i + 1}
 
 symbols = ["+", "-", "*", "/"]
 
