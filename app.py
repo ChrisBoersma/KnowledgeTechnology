@@ -39,7 +39,7 @@ def results():
 	title = 'Result'
 	result = a.getResults()
 	data = ""
-	print(result)
+	#print(result)
 	for i in range(3):
 		data = data + result[i]["Name"] + " " + result[i]["Url"] + ", "
 	return render_template('layouts/resultsFinal.html', title=title, data=data)

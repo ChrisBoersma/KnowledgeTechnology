@@ -81,7 +81,8 @@ def getKimovilURL(specs):
 def addKimovilSpecifications(url):
 	string = requests.get(url).text
 	results = re.findall('<dt>(.*?)</dt>\n<dd class="average">\n<ul class="user-val-overall-dist mini">\n<li><div class="g-bar dist-bar9" style="width: (.*?)%;"></div>', string)
-	#print(list(results))
+	#print("check : ", list(results))
+	#print("~~~~~~~~~~~~~~~~~~~~")
 	results = list(results)
 	r = re.search('"partials": (.*?)}}', string)
 	s = r.group(1) + ","

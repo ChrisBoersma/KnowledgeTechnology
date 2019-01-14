@@ -12,7 +12,7 @@ def updateScores(expression, variable, v):
 def handleInput(givenInput):
 	global questions
 	global db
-	print("Scheisse")
+	#print("Scheisse")
 	questionType = givenInput.get("questiontype")
 	if questionType == "questionselector":
 		newQuestionsStrings = givenInput.getlist("selected")
@@ -32,14 +32,14 @@ def handleInput(givenInput):
 			if k != "questiontype" and k != "expression" and k != "variable":
 				v = givenInput.get(k)
 				for i in range(len(db)):
-					print("Variable: ", variable, " k: ", k, " db: ", db[i][variable].lower(), " k.lower(): ", k.lower())
+					#print("Variable: ", variable, " k: ", k, " db: ", db[i][variable].lower(), " k.lower(): ", k.lower())
 					if variable == None or k == None or db[i][variable].lower() == k.lower():
 						db[i]["score"] *= test2.getValue(expression.replace("?k?", k).replace("?v?", v), db[i], givenInput, 0, [])["value"]
 						#test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
 	elif questionType == "normal":
 		for i in range(len(db)):
 			db[i]["score"] *= test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
-	print("QuestionType: ", questionType)
+	#print("QuestionType: ", questionType)
 	
 	#elif questionType == "Brandlike":
 	#	variableandvalues = givenInput.getList("variableandvalues")
@@ -49,7 +49,7 @@ def handleInput(givenInput):
 	#	for v in values:
 	#		value = givenInput.get(v)
 	#		updateScores(variable, value, v)
-	print(questions)
+	#print(questions)
 
 def getNextQuestion():
 	global i
@@ -69,8 +69,8 @@ def getQuestion(givenInput):
 			db[j]["score"] = 1
 	handleInput(givenInput)
 	newQuestion = getNextQuestion()
-	for d in db:
-		print(d)
+	#for d in db:
+		#print(d)
 	return newQuestion
 
 def getResults():

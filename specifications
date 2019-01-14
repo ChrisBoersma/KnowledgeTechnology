@@ -1,7 +1,6 @@
 Beeldschermdiagonaal (inch)	Screen_diagonal
 Besturingssysteem	Operating_System
 Resolutie (HxW)	Resolution
-Frontcamera resolutie	Frontcamera_resolution
 Maximale capaciteit geheugenkaart	Maximum_sd_card_capacity
 Camera resolutie	Camera_resolution
 og:title	Name
@@ -9,3 +8,13 @@ price	Price
 product:brand	Brand
 Afmetingen (B/H/D)	Size
 og:url	Url
+Is it comfortable?	Comfortable
+battery	Battery
+conectivity	Connectivity
+hardware	Hardware
+And the WiFi?	WIFI
+camera	Camera
+Display	Display
+mediamarkt url	MediaUrl
+kimovil url	KimoUrl
+og:image	Image
