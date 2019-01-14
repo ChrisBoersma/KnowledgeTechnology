@@ -68,10 +68,6 @@ def getNextQuestion():
 
 def getQuestion(givenInput):
 	global db
-	global i
-	if i == 0:
-		for j in range(len(db)):
-			db[j]["score"] = 1
 	handleInput(givenInput)
 	newQuestion = getNextQuestion()
 	#for d in db:
@@ -86,6 +82,7 @@ def getResults():
 
 def init():
 	global db
-	db = openDB("dbsavefile1")
-
+	db = openDB("dbsavefile0")
+	for j in range(len(db)):
+		db[j]["score"] = 1
 init()

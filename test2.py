@@ -36,17 +36,17 @@ def parseVariable(expression, i, specs, givenInput):
 		print("Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
 		variablename += expression[i]
 		i += 1
-	if i < len(expression):
-		if expression[i] == "(":
-			dict = parseFunctionParameters(expression, i, specs, givenInput)
-			i = dict["i"]
-			parameters = dict["parameters"]
-			value = functions[variablename](parameters)
+	if i < len(expression) and expression[i] == "(":
+		dict = parseFunctionParameters(expression, i, specs, givenInput)
+		i = dict["i"]
+		parameters = dict["parameters"]
+		value = functions[variablename](parameters)
+	else:
+		print(specs)
+		if isinstance(specs[variablename], float):
+			value = specs[variablename]
 		else:
-			if isinstance(specs[variablename], float):
-				value = specs[variablename]
-			else:
-				value = specs[variablename].split(" ")[0]
+			value = specs[variablename].split(" ")[0]
 			
 	#if parameters == []:
 	#else:

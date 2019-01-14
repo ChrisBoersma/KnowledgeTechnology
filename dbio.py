@@ -59,33 +59,33 @@ def saveDB(filename, db):
 	f.close()
 
 
-db = openDB("dbsavefile2")
+#db = openDB("dbsavefile2")
 #db = filter.filterDB(db)
 #saveDB("dbsavefile1", db)\
-db2 = []
-i=0
-for specs in db:
-	kurl = extraction.getKimovilURL(specs)
-	if kurl != "":
-		specs2 = extraction.addKimovilSpecifications(kurl)
-		
-		#print("~~~~~~~~~~~~~~~~~~~~")
-		#for i in specs2:
-		for (v, k) in specs2:
-			specs[v] = k
-		#	specs = dict(specs)
-		#print(specs)
-		#specs = dict(specs)
-		#print(specs)		
-		#print(kurl)
-		#specs["mediamarkt url"] = u
-		specs["kimovil url"] = kurl
-		if "Is it comfortable?" in specs:
-			db2.append(specs)
-	
+#db2 = []
+#i=0
+#for specs in db:
+#	kurl = extraction.getKimovilURL(specs)
+#	if kurl != "":
+#		specs2 = extraction.addKimovilSpecifications(kurl)
+#		
+#		#print("~~~~~~~~~~~~~~~~~~~~")
+#		#for i in specs2:
+#		for (v, k) in specs2:
+#			specs[v] = k
+#		#	specs = dict(specs)
+#		#print(specs)
+#		#specs = dict(specs)
+#		#print(specs)		
+#		#print(kurl)
+#		#specs["mediamarkt url"] = u
+#		specs["kimovil url"] = kurl
+#		if "Is it comfortable?" in specs:
+#			db2.append(specs)
+#	
 #print(db2[0])
-db2 = filter.filterDB(db2)
-saveDB("dbsavefile0", db2)
+#db2 = filter.filterDB(db2)
+#saveDB("dbsavefile0", db2)
 
 
 
