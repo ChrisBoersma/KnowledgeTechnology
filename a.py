@@ -12,7 +12,6 @@ def updateScores(expression, variable, v):
 def handleInput(givenInput):
 	global questions
 	global db
-	#print("Scheisse")
 	questionType = givenInput.get("questiontype")
 	if questionType == "questionselector":
 		newQuestionsStrings = givenInput.getlist("selected")
@@ -39,7 +38,13 @@ def handleInput(givenInput):
 	elif questionType == "normal":
 		for i in range(len(db)):
 			db[i]["score"] *= test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
-	#print("QuestionType: ", questionType)
+
+	elif questionType == "radio":
+		variableandvalues = givenInput.get("variableandvalues")
+		variableandvalueslist = variableandvalues.split("\t")
+		variable = variableandvalueslist[0]
+		for i in range(len(db)):
+			db[i]["score"] *= test2.parseExpression(givenInput.get(variable), db[i], givenInput)
 	
 	#elif questionType == "Brandlike":
 	#	variableandvalues = givenInput.getList("variableandvalues")

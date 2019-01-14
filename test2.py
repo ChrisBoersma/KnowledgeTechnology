@@ -2,8 +2,14 @@ import math
 
 def sigmoid(args):
 	#print("Sigmoid args: " + str(args))
-	x = args[1] - args[0]
-	return 1 / (1 + math.exp(-x))
+	x = float(args[1]) - float(args[0])
+	print(x)
+	if x > 20:
+		return 1
+	elif x < -20:
+		return 0
+	else:
+		return 1 / (1 + math.exp(-x))
 
 functions = {"sigmoid": sigmoid}
 
@@ -26,8 +32,8 @@ def parseFunctionParameters(expression, i, specs, givenInput):
 def parseVariable(expression, i, specs, givenInput):
 	variablename = ""
 	parameters = []
-	while i in range(len(expression)) and expression[i].isalnum():
-		print("parseVariable : Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
+	while i in range(len(expression)) and (expression[i].isalnum() or expression[i] == "_"):
+		print("Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
 		variablename += expression[i]
 		i += 1
 	if i < len(expression):
@@ -40,7 +46,7 @@ def parseVariable(expression, i, specs, givenInput):
 			if isinstance(specs[variablename], float):
 				value = specs[variablename]
 			else:
-				value = float(specs[variablename].split(" ")[0])
+				value = specs[variablename].split(" ")[0]
 			
 	#if parameters == []:
 	#else:
@@ -76,9 +82,19 @@ def parseInputVariable(expression, i, givenInput):
 		print("parseInputVariable : Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
 		variablename += expression[i]
 		i += 1
-	return {"value": float(givenInput.get(variablename)), "i": i + 1}
+	return {"value": givenInput.get(variablename), "i": i + 1}
+
+def parseString(expression, i, givenInput):
+	i += 1
+	variablename = ""
+	while i in range(len(expression)) and expression[i] != '"':
+		print("Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
+		variablename += expression[i]
+		i += 1
+	return {"value": variablename, "i": i + 1}
 
 symbols = ["+", "-", "*", "/"]
+symbols2 = ["=", "!"]
 
 def getValue(expression, specs, givenInput, i, ends):
 	values = []
@@ -102,12 +118,16 @@ def getValue(expression, specs, givenInput, i, ends):
 			dict = parseInputVariable(expression, i, givenInput)
 			values.append(dict["value"])
 			i = dict["i"]
+		elif expression[i] == '"':
+			dict = parseString(expression, i, givenInput)
+			values.append(dict["value"])
+			i = dict["i"]
 		elif expression[i] in symbols:
 		#	print("VALUES: ", values)
 			if(len(values) < 2):
 				raise ValueError
-			a = values[-2]
-			b = values[-1]
+			a = float(values[-2])
+			b = float(values[-1])
 			values = values[:-1]
 			#print("VALUES2: ", values)
 			if expression[i] == "+":
@@ -120,6 +140,19 @@ def getValue(expression, specs, givenInput, i, ends):
 				values[-1] = a / b
 			#print("VALUES3: ", values)
 			i += 1
+		elif expression[i] in symbols2:
+			print("VALUES: ", values)
+			if(len(values) < 2):
+				raise ValueError
+			a = values[-2]
+			b = values[-1]
+			values = values[:-1]
+			print("Substring: ", expression[i:i+2])
+			if expression[i:i+2] == "==":
+				values[-1] = (a == b)
+			elif expression[i:i+2] == "!=":
+				values[-1] = (a != b)
+			i += 2
 	return {"value": values[0], "i": i}
 
 def parseExpression(expression, specs, givenInput):
@@ -143,8 +176,6 @@ def parseExpression(expression, specs, givenInput):
 #print(p)
 #p = parseVariable("heyo ", 0, {"heyo": 12}, {})
 #print(p)
-#p = parseExpression("12 1 sigmoid(2, 3) + *", {"a": 23.7}, {})
-#print(p)
-
-p = parseFunctionParameters("(a, 12 1 sigmoid(2, 3) + *, 2)", 0, {"a": 23.7}, {})
+p = parseExpression('"What" a ==', {"a": "What"}, {})
+print(p)
 #print(p)
