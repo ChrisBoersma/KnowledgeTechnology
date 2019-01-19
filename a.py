@@ -98,8 +98,23 @@ def getResults():
 	data = ""
 	result = db
 	result = sorted(result, key=lambda result: result['score'], reverse=True)
-	for i in range(len(result)):
-		data = data + "<tr><td>" + result[i]["Name"] + "</td><td> " + "<a href=\"" + result[i]["Url"] + "\">Link </a></td><td>" + str(result[i]["score"]) + "</td><td><img src=\"" + str(result[i]["Image"]) + "\"></td></tr>" + "\n"
+	i = 0
+	while i in range(len(result)):
+		j = 0
+		row1 = "<tr>"
+		row2 = "<tr>"
+		row3 = "<tr>"
+		while i + j in range(len(result)) and j in range(3):
+			row1 = row1 + "<td><a href=\"" + result[i + j]["Url"] + "\"><img src=\"" + str(result[i + j]["Image"]) + "\"></a></td>"
+			row2 = row2 + "<td><a href=\"" + result[i + j]["Url"] + "\">" + result[i + j]["Name"] + "</a></td>"
+			row3 = row3 + "<td><a href=\"" + result[i + j]["Url"] + "\">Rank: " + str(i + j + 1) + " Score:" + str(result[i + j]["score"]) + " Price: €" + str(result[i + j]["Price"]) + "</a></td>"
+		#"<tr><td>" + result[i]["Name"] + "</td><td> " + "<a href=\"" + result[i]["Url"] + "\">Link </a></td><td>" + str(result[i]["score"]) + "</td><td><img src=\"" + str(result[i]["Image"]) + "\"></td></tr>" + "\n"
+			j += 1
+		row1 += "</tr>\n"
+		row2 += "</tr>\n"
+		row3 += "</tr>\n"
+		data += row1 + row2 + row3
+		i += 3
 	
 	f = open("templates/layouts/resultsFinal.html", "w")
 	f.write("<div class=\"row text-center\"> \n <h1>Results</h1> \n<table>"+ data +"</table>\n </div>")

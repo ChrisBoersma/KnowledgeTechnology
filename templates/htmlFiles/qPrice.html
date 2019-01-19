@@ -27,6 +27,7 @@
       value: 750,
       create: function() {
         handle.text( $( this ).slider( "value" ) );
+	document.getElementById('budgetId').value = ui.value
       },
       slide: function( event, ui ) {
         handle.text( ui.value );
