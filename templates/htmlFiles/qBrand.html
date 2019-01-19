@@ -16,13 +16,15 @@
 	<div role="main" class="ui-content">
 		<p>
 		<form action="" method="post">
-			How much do you prefer these brands?<br>
+			How much do you prefer these brands? (Keep default settings if you don't have a preference)<br>
 			<input type="hidden" name="questiontype" value="Brandlike">
 			<input type="hidden" name="variable" value="Brand">
-			<input type="hidden" name="expression" value="?v?">
-			Samsung: <input type="range" name="Samsung" value=""><br>
-			Huawei: <input type="range" name="Huawei" value=""><br>
-			Apple: <input type= "range" name="Apple" value=""><br>
+			<input type="hidden" name="expression" value="?v? 100 /">
+			Samsung: <input type="range" name="Samsung" value="" min = "0" max = "100"><br>
+			Huawei: <input type="range" name="Huawei" value="" min = "0" max = "100"><br>
+			Apple: <input type= "range" name="Apple" value="" min = "0" max = "100"><br>
+			Motorola: <input type="range" name="Motorola" value="" min = "0" max = "100"><br>
+			Xiaomi: <input type= "range" name="Xiaomi" value="" min = "0" max = "100"><br>
 			<input type="submit">
 		</p>
 	</div>

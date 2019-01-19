@@ -1,6 +1,7 @@
 from dbio import *
 import test2
-questions = ["qUsage.html", "qBrand.html", "qPrice.html", "qSize.html"]
+originalquestions = ["qUsage.html", "qBrand.html", "qPrice.html", "qSize.html"]
+questions = []
 i = 0
 db = []
 
@@ -14,12 +15,17 @@ def handleInput(givenInput):
 	global db
 	questionType = givenInput.get("questiontype")
 	if questionType == "questionselector":
+		print(questions)
+		print(originalquestions)
 		newQuestionsStrings = givenInput.getlist("selected")
 		for n in newQuestionsStrings:
+			print("Questions String ", n)
 			newQuestions = n.split(" ")
 			for nq in newQuestions:
 				if nq not in questions:
 					questions.append(nq)
+		print(questions)
+		print(originalquestions)
 	elif questionType == "Brandlike":
 	#	variableandvalues = givenInput.getList("variableandvalues")
 	#	variableandvalueslist = variableandvalues.split("\t")
@@ -35,9 +41,13 @@ def handleInput(givenInput):
 					if variable == None or k == None or db[i][variable].lower() == k.lower():
 						db[i]["score"] *= test2.getValue(expression.replace("?k?", k).replace("?v?", v), db[i], givenInput, 0, [])["value"]
 						#test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
+		for r in db:
+			print(r["Name"], " ", r["score"])
 	elif questionType == "normal":
 		for i in range(len(db)):
+			print("Budget: ", givenInput.get("Budget"))
 			db[i]["score"] *= test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
+			print(db[i]["score"])
 
 	elif questionType == "radio":
 		variableandvalues = givenInput.get("variableandvalues")
@@ -68,7 +78,16 @@ def getNextQuestion():
 
 def getQuestion(givenInput):
 	global db
+	global questions
+	global i
 	handleInput(givenInput)
+	if len(givenInput) == 0:
+		print("no given input")
+
+		i = 0
+		questions = originalquestions.copy()
+		for j in range(len(db)):
+			db[j]["score"] = 1
 	newQuestion = getNextQuestion()
 	#for d in db:
 		#print(d)
@@ -76,7 +95,7 @@ def getQuestion(givenInput):
 
 def getResults():
 	newDb = db
-	newDb = sorted(newDb, key=lambda newDb: newDb['score'])
+	newDb = sorted(newDb, key=lambda newDb: newDb['score'], reverse=True)
 	return newDb
 		
 

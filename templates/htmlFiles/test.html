@@ -22,37 +22,22 @@
   $( function() {
     var handle = $( "#custom-handle" );
     $( "#slider" ).slider({
-      min: 1,
-      max: 1500,
-      value: 750,
       create: function() {
         handle.text( $( this ).slider( "value" ) );
       },
       slide: function( event, ui ) {
         handle.text( ui.value );
-	document.getElementById('budgetId').value = ui.value
       }
     });
   } );
   </script>
-
 </head>
 <body>
  
-<p>
-
-<form action="" method="post">
-	What is your budget?<br>
-	<div id="slider">
-	  <div id="custom-handle" class="ui-slider-handle"></div>
-	</div>
-	<input type="hidden" name="questiontype" value="normal">
-	<input type="hidden" name="expression" value="sigmoid(Price, <Budget>)">
-	<input type="hidden" name="Budget" id="budgetId" value="0"><br>
-	<input type="submit">
-</p>
+<div id="slider">
+  <div id="custom-handle" class="ui-slider-handle"></div>
+</div>
  
  
 </body>
 </html>
-

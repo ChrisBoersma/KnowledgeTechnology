@@ -2,8 +2,16 @@ import math
 
 def sigmoid(args):
 	#print("Sigmoid args: " + str(args))
-	x = float(args[1]) - float(args[0])
-	print(x)
+	x = float(args[1]) - float(args[0]) / 100
+	print("Arguments: ", args[0], args[1])
+	print("X: ", x)
+	if x > 20:
+		print("Sigmoid: ", 1)
+	elif x < -20:
+		print("Sigmoid: ", 0)
+	else:
+		print("Sigmoid: ", 1 / (1 + math.exp(-x)))
+
 	if x > 20:
 		return 1
 	elif x < -20:
@@ -87,7 +95,7 @@ def parseInputVariable(expression, i, givenInput):
 def parseString(expression, i, givenInput):
 	i += 1
 	variablename = ""
-	while i in range(len(expression)) and expression[i] != '"':
+	while i in range(len(expression)) and expression[i] != "'":
 		print("Expression: " + expression + " i: " + str(i) + " expression[i]: " + expression[i])
 		variablename += expression[i]
 		i += 1
@@ -118,7 +126,7 @@ def getValue(expression, specs, givenInput, i, ends):
 			dict = parseInputVariable(expression, i, givenInput)
 			values.append(dict["value"])
 			i = dict["i"]
-		elif expression[i] == '"':
+		elif expression[i] == "'":
 			dict = parseString(expression, i, givenInput)
 			values.append(dict["value"])
 			i = dict["i"]
@@ -176,6 +184,6 @@ def parseExpression(expression, specs, givenInput):
 #print(p)
 #p = parseVariable("heyo ", 0, {"heyo": 12}, {})
 #print(p)
-p = parseExpression('"What" a ==', {"a": "What"}, {})
-print(p)
+#p = parseExpression('"What" a ==', {"a": "What"}, {})
+#print(p)
 #print(p)

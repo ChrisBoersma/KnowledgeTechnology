@@ -40,8 +40,8 @@ def results():
 	result = a.getResults()
 	data = ""
 	#print(result)
-	for i in range(3):
-		data = data + result[i]["Name"] + " " + result[i]["Url"] + ", "
+	for i in range(len(result)):
+		data = data + result[i]["Name"] + " " + result[i]["Url"] + " " + str(result[i]["score"]) + "\n"
 	return render_template('layouts/resultsFinal.html', title=title, data=data)
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)

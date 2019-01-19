@@ -16,12 +16,12 @@
 	<div role="main" class="ui-content">
 		<p>
 		<form action="" method="post">
-			Do you stream a lot?<br>
+			Do you stream a lot on wifi?<br>
 			<input type="hidden" name="questiontype" value="radio">
 			<input type="hidden" name="variableandvalues" value="Stream	Yes	No	Bit">
-			<input type="radio" name="Stream" value="Yes"> Yes<br>
-			<input type="radio" name="Stream" value="No"> No<br>
-			<input type="radio" name="Stream" value="Bit"> A little bit<br>
+			<input type="radio" name="Stream" value="sigmoid(WIFI, 7)"> Yes<br>
+			<input type="radio" name="Stream" value="1"> No<br>
+			<input type="radio" name="Stream" value="sigmoid(WIFI, 5)"> A little bit<br>
 			<input type="submit">
 		</p>
 	</div>
