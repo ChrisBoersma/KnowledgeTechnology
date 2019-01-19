@@ -38,10 +38,7 @@ def questions():
 def results():
 	title = 'Result'
 	result = a.getResults()
-	data = ""
 	#print(result)
-	for i in range(len(result)):
-		data = data + result[i]["Name"] + " " + result[i]["Url"] + " " + str(result[i]["score"]) + "\n"
-	return render_template('layouts/resultsFinal.html', title=title, data=data)
+	return render_template('layouts/index.html', title=title, data="layouts/resultsFinal.html")
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)

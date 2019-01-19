@@ -94,9 +94,18 @@ def getQuestion(givenInput):
 	return newQuestion
 
 def getResults():
-	newDb = db
-	newDb = sorted(newDb, key=lambda newDb: newDb['score'], reverse=True)
-	return newDb
+	
+	data = ""
+	result = db
+	result = sorted(result, key=lambda result: result['score'], reverse=True)
+	for i in range(len(result)):
+		data = data + result[i]["Name"] + " " + "<a href=\"" + result[i]["Url"] + "\">Link </a>" + str(result[i]["score"]) + "<img src=\"" + str(result[i]["Image"]) + "\">" + "<br>"
+	
+	f = open("templates/layouts/resultsFinal.html", "w")
+	f.write("<div class=\"row text-center\"> \n <h1>Results</h1> \n"+ data +"\n </div>")
+	f.close
+		
+	return data
 		
 
 def init():
