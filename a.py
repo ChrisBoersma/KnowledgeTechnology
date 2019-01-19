@@ -99,10 +99,10 @@ def getResults():
 	result = db
 	result = sorted(result, key=lambda result: result['score'], reverse=True)
 	for i in range(len(result)):
-		data = data + result[i]["Name"] + " " + "<a href=\"" + result[i]["Url"] + "\">Link </a>" + str(result[i]["score"]) + "<img src=\"" + str(result[i]["Image"]) + "\">" + "<br>"
+		data = data + "<tr><td>" + result[i]["Name"] + "</td><td> " + "<a href=\"" + result[i]["Url"] + "\">Link </a></td><td>" + str(result[i]["score"]) + "</td><td><img src=\"" + str(result[i]["Image"]) + "\"></td></tr>" + "\n"
 	
 	f = open("templates/layouts/resultsFinal.html", "w")
-	f.write("<div class=\"row text-center\"> \n <h1>Results</h1> \n"+ data +"\n </div>")
+	f.write("<div class=\"row text-center\"> \n <h1>Results</h1> \n<table>"+ data +"</table>\n </div>")
 	f.close
 		
 	return data
