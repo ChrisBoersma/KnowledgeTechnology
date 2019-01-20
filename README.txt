@@ -2,9 +2,12 @@ Our system only runs on linux
 
 You need to have python3 installed
 
-You need to install Flask
+You need to install the following packages:
+Flask
+
 this can be done by going to the root and typing:
 sudo pip3 install flask
+sudo pip3 install requests
 
 To run the sytem navigate to the folder and type the following command:
 python3 app.py
