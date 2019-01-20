@@ -2,11 +2,9 @@ usedSpecs = {}
 
 def filter(specs):
 	filteredSpecs = {}
-	#print(specs)
 	for k in specs:
 		if k in usedSpecs:
 			filteredSpecs[usedSpecs[k]] = specs[k]
-		#print(k + ", " + specs[k])
 	return filteredSpecs
 
 def filterDB(db):
@@ -22,7 +20,6 @@ def readUsedSpecs():
 	for l in F.readlines():
 		l = l.rstrip()
 		m = l.split("\t")
-		#print(m)
 		usedSpecs[m[0]] = m[1]
 	F.close()
 

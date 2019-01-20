@@ -6,11 +6,7 @@ from flask import redirect, request, jsonify, url_for
 import io
 import os
 import uuid
-#import read
-#from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-#from matplotlib.figure import Figure
-#import numpy as np
-import a
+import interactionmanager
 
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
@@ -20,33 +16,23 @@ app._static_folder = os.path.abspath("templates/static/")
 
 @app.route('/', methods=['GET','POST'])
 def index():
-	title = 'Hello world'
-	if request.method=='GET':
-		data = "/htmlFiles/index.html"
-		return render_template('layouts/index.html',
-						   title=title, data = data)
-	elif request.method=='POST':
-		title = 'Question'
-		data = request.form.getlist("brand")
-		data = a.getQuestion(request.form)
-		return render_template('layouts/index.html',
-							title=title,
-							data=data)					   
-	#read.init()
-	#q = read.getNextQuestion()
-	#data = read.generateForm(q)
+	title = 'Smartphone recommendation'
+	data = "/htmlFiles/index.html"
+	return render_template('layouts/index.html',
+					   title=title, data = data)
+	
 @app.route('/questions/', methods=['GET', 'POST'])
 def questions():
-	title = 'Question'
+	title = 'Questions'
 	data = request.form.getlist("brand")
-	data = a.getQuestion(request.form)
+	data = interactionmanager.getQuestion(request.form)
 	return render_template('layouts/index.html',
 						   title=title,
 						   data=data)
 @app.route('/results/', methods=['GET', 'POST'])
 def results():
-	title = 'Result'
-	result = a.getResults()
+	title = 'Results'
+	result = interactionmanager.getResults()
 	#print(result)
 	return render_template('layouts/index.html', title=title, data="layouts/resultsFinal.html")
 if __name__ == '__main__':

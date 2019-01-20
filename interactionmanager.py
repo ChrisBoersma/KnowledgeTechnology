@@ -1,76 +1,45 @@
 from dbio import *
-import test2
+import expressionparser as ep
 originalquestions = ["qUsage.html", "qBrand.html", "qPrice.html", "qSize.html"]
 questions = []
 i = 0
 db = []
-
-def updateScores(expression, variable, v):
-	for i in range(len(scores)):
-		if variable == None or v == None or db[i][variable] == v:
-			scores[i] *= test2.parseExpression(expression, db[i])
 
 def handleInput(givenInput):
 	global questions
 	global db
 	questionType = givenInput.get("questiontype")
 	if questionType == "questionselector":
-		print(questions)
-		print(originalquestions)
 		newQuestionsStrings = givenInput.getlist("selected")
 		for n in newQuestionsStrings:
-			print("Questions String ", n)
 			newQuestions = n.split(" ")
 			for nq in newQuestions:
 				if nq not in questions:
 					questions.append(nq)
-		print(questions)
-		print(originalquestions)
 	elif questionType == "Brandlike":
-	#	variableandvalues = givenInput.getList("variableandvalues")
-	#	variableandvalueslist = variableandvalues.split("\t")
-	#	variable = variableandvalueslist[0]
-	#	values = variableandvalueslist[1:]
 		variable = givenInput.get("variable")
 		expression = givenInput.get("expression")
 		for k in givenInput:
 			if k != "questiontype" and k != "expression" and k != "variable":
 				v = givenInput.get(k)
 				for i in range(len(db)):
-					#print("Variable: ", variable, " k: ", k, " db: ", db[i][variable].lower(), " k.lower(): ", k.lower())
 					if variable == None or k == None or db[i][variable].lower() == k.lower():
-						db[i]["score"] *= test2.getValue(expression.replace("?k?", k).replace("?v?", v), db[i], givenInput, 0, [])["value"]
-						#test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
-		for r in db:
-			print(r["Name"], " ", r["score"])
+						db[i]["score"] *= ep.getValue(expression.replace("?k?", k).replace("?v?", v), db[i], givenInput, 0, [])["value"]
 	elif questionType == "normal":
 		for i in range(len(db)):
-			print("Budget: ", givenInput.get("Budget"))
-			db[i]["score"] *= test2.parseExpression(givenInput.get("expression"), db[i], givenInput)
-			print(db[i]["score"])
+			db[i]["score"] *= ep.parseExpression(givenInput.get("expression"), db[i], givenInput)
 
 	elif questionType == "radio":
 		variableandvalues = givenInput.get("variableandvalues")
 		variableandvalueslist = variableandvalues.split("\t")
 		variable = variableandvalueslist[0]
 		for i in range(len(db)):
-			db[i]["score"] *= test2.parseExpression(givenInput.get(variable), db[i], givenInput)
-	
-	#elif questionType == "Brandlike":
-	#	variableandvalues = givenInput.getList("variableandvalues")
-	#	variableandvalueslist = variableandvalues.split("\t")
-	#	variable = variableandvalueslist[0]
-	#	values = variableandvalueslist[1:]
-	#	for v in values:
-	#		value = givenInput.get(v)
-	#		updateScores(variable, value, v)
-	#print(questions)
+			db[i]["score"] *= ep.parseExpression(givenInput.get(variable), db[i], givenInput)
 
 def getNextQuestion():
 	global i
 	global questions
 	if i == len(questions):
-		#results
 		return "layouts/results.html"
 	q = questions[i]
 	i += 1
@@ -82,15 +51,11 @@ def getQuestion(givenInput):
 	global i
 	handleInput(givenInput)
 	if len(givenInput) == 0:
-		print("no given input")
-
 		i = 0
 		questions = originalquestions.copy()
 		for j in range(len(db)):
 			db[j]["score"] = 1
 	newQuestion = getNextQuestion()
-	#for d in db:
-		#print(d)
 	return newQuestion
 
 def getResults():
@@ -108,7 +73,6 @@ def getResults():
 			row1 = row1 + "<td><a href=\"" + result[i + j]["Url"] + "\"><img src=\"" + str(result[i + j]["Image"]) + "\"></a></td>"
 			row2 = row2 + "<td><a href=\"" + result[i + j]["Url"] + "\">" + result[i + j]["Name"] + "</a></td>"
 			row3 = row3 + "<td><a href=\"" + result[i + j]["Url"] + "\">Rank: " + str(i + j + 1) + " Score:" + str(result[i + j]["score"]) + " Price: €" + str(result[i + j]["Price"]) + "</a></td>"
-		#"<tr><td>" + result[i]["Name"] + "</td><td> " + "<a href=\"" + result[i]["Url"] + "\">Link </a></td><td>" + str(result[i]["score"]) + "</td><td><img src=\"" + str(result[i]["Image"]) + "\"></td></tr>" + "\n"
 			j += 1
 		row1 += "</tr>\n"
 		row2 += "</tr>\n"

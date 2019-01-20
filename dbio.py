@@ -3,17 +3,13 @@ import filter
 
 def extractInformation():
 	db = []
-	urls = extraction.getMediaMarktURLs()[:2]
-	#urls = ["https://www.mediamarkt.nl/nl/product/_wiko-sunny3-mini-8gb-dual-sim-zwart-1601156.html", "https://www.mediamarkt.nl/nl/product/_nokia-1-2018-8gb-dual-sim-rood-1562780.html"]
+	urls = extraction.getMediaMarktURLs()
 	for u in urls:
 		specs = extraction.getMediaMarktSpecifications(u)
-		#print("Loop: " + u)
 		kurl = extraction.getKimovilURL(specs)
 		if kurl != "":
 			specs += extraction.addKimovilSpecifications(kurl)
 			specs = dict(specs)
-			print(specs)
-			#print(kurl)
 			specs["mediamarkt url"] = u
 			specs["kimovil url"] = kurl
 			db.append(specs)
@@ -57,36 +53,3 @@ def saveDB(filename, db):
 			if keys[j] in db[i]:
 				f.write(db[i][keys[j]].replace("\n", " ").replace("\t", " "))
 	f.close()
-
-
-#db = openDB("dbsavefile2")
-#db = filter.filterDB(db)
-#saveDB("dbsavefile1", db)\
-#db2 = []
-#i=0
-#for specs in db:
-#	kurl = extraction.getKimovilURL(specs)
-#	if kurl != "":
-#		specs2 = extraction.addKimovilSpecifications(kurl)
-#		
-#		#print("~~~~~~~~~~~~~~~~~~~~")
-#		#for i in specs2:
-#		for (v, k) in specs2:
-#			specs[v] = k
-#		#	specs = dict(specs)
-#		#print(specs)
-#		#specs = dict(specs)
-#		#print(specs)		
-#		#print(kurl)
-#		#specs["mediamarkt url"] = u
-#		specs["kimovil url"] = kurl
-#		if "Is it comfortable?" in specs:
-#			db2.append(specs)
-#	
-#print(db2[0])
-#db2 = filter.filterDB(db2)
-#saveDB("dbsavefile0", db2)
-
-
-
-#extractInformation()
